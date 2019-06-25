@@ -23,6 +23,7 @@ public class Comentario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "comentario_id")
     private Integer id;
 
     private String descripcion;
@@ -37,10 +38,9 @@ public class Comentario {
     private String owner;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "publicacion_id", referencedColumnName = "id")
+    @JoinColumn(name = "publicacion_id", referencedColumnName = "publicacion_id")
     @JsonIgnore
     private Publicacion publicacion;
-
 
     @PrePersist
     public void setFecha(){

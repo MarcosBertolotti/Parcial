@@ -19,10 +19,12 @@ import static java.util.Objects.isNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@Table(name = "publicaciones")
 public class Publicacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "publicacion_id")
     private Integer id;
 
     private String titulo;
@@ -38,14 +40,12 @@ public class Publicacion {
     private Integer liked;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    @JoinColumn(name = "usuario_id", referencedColumnName = "usuario_id")
     @JsonIgnore
     private Usuario usuario;
 
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "publicacion")
     private List<Comentario> comentarios;
-
-
 
     @PrePersist
     public void setFechaPublicacion(){
